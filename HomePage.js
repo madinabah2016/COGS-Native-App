@@ -37,6 +37,7 @@ export default class Home extends React.Component {
     render(){
         return(
             <View>
+                <Button title="Settings" onPress={this.props.navigation.navigate('Settings')}></Button>
                 <Text>Welcome to your home page</Text>
             </View>
         )

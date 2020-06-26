@@ -30,6 +30,7 @@ export default class SignIn extends React.Component {
     render(){
         return (
             <View>
+                
                 <TextInput placeholder="Email" placeholderTextColor='black' onChangeText={this.handleEmail} />  
                 <TextInput placeholder="Password" placeholderTextColor='black' onChangeText={this.handlePassword}/> 
                 <Button title="Login" color="blue" onPress={()=>this.login()}/>

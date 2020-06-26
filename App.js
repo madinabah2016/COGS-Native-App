@@ -3,11 +3,12 @@ import React from 'react';
 import {
   View, Text, StyleSheet
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import SignIn from './SignInPage';
 import SignUp from './SignUpPage'; 
 import Home from './HomePage';
+import Settings from './SettingsPage';
 
 
 export default function App() {
@@ -27,6 +28,7 @@ function MainStackNavigator() {
         <Stack.Screen name='SignIn' component={SignIn} />
         <Stack.Screen name='SignUp' component={SignUp} />
         <Stack.Screen name='Home' component={Home} />
+        <Stack.Screen name='Settings' component={Settings}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

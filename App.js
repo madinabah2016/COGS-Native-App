@@ -1,7 +1,7 @@
 
 import React from 'react';
 import {
-  View, Text, StyleSheet
+  View, Text, StyleSheet, BackHandler
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -25,7 +25,10 @@ function MainStackNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen name='SignIn' component={SignIn} />
+        <Stack.Screen name='SignIn' component={SignIn} options={{
+          //Removes back buton from navigation bar
+          headerLeft:null
+        }} />
         <Stack.Screen name='SignUp' component={SignUp} />
         <Stack.Screen name='Home' component={Home} />
         <Stack.Screen name='Settings' component={Settings}/>

@@ -1,15 +1,14 @@
 import React from 'react';
 import {
-  View, Text, StyleSheet, Button
+  View, Text, StyleSheet, Button, TextInput
 } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
 import Firebase from './config';
 
 export default class Settings extends React.Component{
 
     state={
-        username:'',
-        courses:''
+        username:'hh',
+        courses:'hh'
     }
 
     handleUsername = (text)=>{
@@ -30,17 +29,24 @@ export default class Settings extends React.Component{
         .catch(err=>{console.log("Error Message:"+err)})
     }
 
-    save = ()=>{
-        console.log("User settings has been saved into the Database");
+    save = ()=>{ 
+        let id = Firebase.auth().currentUser.uid.toString();
+        var user = {name:this.state.username, courses:this.state.courses}
+        console.log('User name: '+this.state.username+' Course:'+ this.state.courses)
+        Firebase.database().ref('Users/'+id).set(user)
+        .then(()=>{console.log('Settings is succesgulyy saved')})
+        .catch(err=>{console.log("Error Message in settings: "+err)})
+        const {goBack} = this.props.navigation;
+        goBack();
     }
 
     render(){
         return(
             <View>
-                <TextInput placeholder="User Name" onChange={this.handleUsername}></TextInput>
-                <TextInput placeholder="Classes; separated by comma" onChange={this.handleCoureses}></TextInput>
-                <Button title="SAVE" style={styles.button}></Button>
-                <Button title="LOGOUT"></Button>
+                <TextInput placeholder="User Name" style={styles.test} onChangeText={this.handleUsername}></TextInput>
+                <TextInput placeholder="Classes; separated by comma" onChangeText={this.handleCoureses}></TextInput>
+                <Button title="SAVE" color='green' onPress={this.save}></Button>
+                <Button title="LOGOUT" onPress={this.logout}></Button>
             </View>
 
         );
@@ -48,9 +54,7 @@ export default class Settings extends React.Component{
 }
 
 const styles = StyleSheet.create({
-    button:{
-        marginBottom:20,
-        margin: 10,
-        backgroundColor:'grey'
+    test:{
+        fontSize:15,
     }
 });

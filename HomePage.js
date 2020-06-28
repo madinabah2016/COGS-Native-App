@@ -13,10 +13,6 @@ export default class Home extends React.Component {
     }
 
 
-    navigateToSignIn = ()=>{
-        this.props.navigation.navigate('SignIn');
-    }
-
     componentDidMount(){
 
           Firebase.auth().onAuthStateChanged(user=>{
@@ -30,14 +26,12 @@ export default class Home extends React.Component {
 
           })
 
-          //auth.onAuthStateChanged()
-
     }
 
     render(){
         return(
             <View>
-                <Button title="Settings" onPress={this.props.navigation.navigate('Settings')}></Button>
+                <Button title="Settings" onPress={()=>this.props.navigation.navigate('Settings')}></Button>
                 <Text>Welcome to your home page</Text>
             </View>
         )

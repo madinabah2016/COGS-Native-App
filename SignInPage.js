@@ -1,10 +1,15 @@
 import React from 'react';
 import {
-  View, Button,Text, TextInput
+  View, Button,Text, TextInput, BackHandler
 } from 'react-native';
 import Firebase from './config';
 
 export default class SignIn extends React.Component {
+
+    constructor() {
+        super();           
+        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+    }
 
     state = {
         email:'',
@@ -27,10 +32,22 @@ export default class SignIn extends React.Component {
         .catch(err=> console.log("Error Message+ "+err));
     }
 
+    componentWillMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+ 
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+    }
+ 
+    handleBackButtonClick() {
+        BackHandler.exitApp();
+        return true;
+    }
+
     render(){
         return (
             <View>
-                
                 <TextInput placeholder="Email" placeholderTextColor='black' onChangeText={this.handleEmail} />  
                 <TextInput placeholder="Password" placeholderTextColor='black' onChangeText={this.handlePassword}/> 
                 <Button title="Login" color="blue" onPress={()=>this.login()}/>

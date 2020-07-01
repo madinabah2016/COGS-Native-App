@@ -5,10 +5,10 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import SignIn from './SignInPage';
-import SignUp from './SignUpPage'; 
-import Home from './HomePage';
-import Settings from './SettingsPage';
+import SignIn from './screens/SignInPage';
+import SignUp from './screens/SignUpPage'; 
+import Home from './screens/HomePage';
+import Settings from './screens/SettingsPage';
 
 
 export default function App() {

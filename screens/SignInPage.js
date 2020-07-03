@@ -2,7 +2,7 @@ import React from 'react';
 import {
   View, Button,Text, TextInput, BackHandler
 } from 'react-native';
-import Firebase from './config';
+import Firebase from '../api/config';
 
 export default class SignIn extends React.Component {
 

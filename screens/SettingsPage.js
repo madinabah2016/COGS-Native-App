@@ -2,9 +2,8 @@ import React from 'react';
 import {
   View, Text, StyleSheet, Button, TextInput, Image, TouchableOpacity
 } from 'react-native';
-import Firebase from './config';
+import Firebase from '../api/config';
 import ImagePicker from 'react-native-image-picker';
-
 
 export default class Settings extends React.Component{
 

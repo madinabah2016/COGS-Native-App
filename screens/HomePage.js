@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 
 import Firebase, {getUserGroups, getGroupDetail} from '../api/config'
+import { ScrollView } from 'react-native-gesture-handler';
 
 const styles = StyleSheet.create({
 
@@ -79,8 +80,6 @@ export default class Home extends React.Component {
 
           var details = [];
           
-
-
     }
 
     render(){
@@ -88,11 +87,13 @@ export default class Home extends React.Component {
             <View>
                 <Button title="Settings" onPress={()=>this.props.navigation.navigate('Settings')}></Button>
                 <Text>Welcome to your home page</Text>
-                {
-                this.state.groupList.map((item)=>{
-                  return(<GroupCard name={item.groupName} members={item.members.length} meetings='0'/>);
-                })
-                }
+                <ScrollView>
+                  {
+                  this.state.groupList.map((item)=>{
+                    return(<GroupCard name={item.groupName} members={item.members.length} meetings='0'/>);
+                  })
+                  }
+                </ScrollView>
             </View>
         )
     }

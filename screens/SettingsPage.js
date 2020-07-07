@@ -2,8 +2,9 @@ import React from 'react';
 import {
   View, Text, StyleSheet, Button, TextInput, Image, TouchableOpacity
 } from 'react-native';
-import Firebase from '../api/config';
+import Firebase from 'firebase';
 import ImagePicker from 'react-native-image-picker';
+
 
 export default class Settings extends React.Component{
 
@@ -67,10 +68,7 @@ export default class Settings extends React.Component{
           }
           else{
             console.log('Settings is succesfully saved')
-
-            Firebase.storage().ref().child('User Image').child(id).put(this.state.resourcePath.uri)
-            .then(()=>console.log("Image has been scussfully uploaded"));
-
+            
           }
 
         });
@@ -105,7 +103,7 @@ export default class Settings extends React.Component{
             });
           }
         });
-      };
+    };
 
     render(){
         return(

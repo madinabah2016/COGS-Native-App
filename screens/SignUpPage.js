@@ -2,7 +2,7 @@ import React from 'react';
 import {
   View, Button, TextInput, Text
 } from 'react-native';
-import Firebase, { auth } from '../api/config';
+import Firebase from '../api/config';
 
 export default class SignUp extends React.Component {
 

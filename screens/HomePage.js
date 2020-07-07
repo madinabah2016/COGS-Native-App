@@ -1,23 +1,74 @@
 import React from 'react';
 import {
-  View, Button,Text, TextInput
+  View, Button,Text, TextInput, StyleSheet
 } from 'react-native';
-import Firebase from 'firebase';
 
+import Firebase, {getUserGroups, getGroupDetail} from '../api/config'
 
+const styles = StyleSheet.create({
+
+  container:{
+    marginTop:5,
+    justifyContent:'center',
+    alignItems:'center',
+  }
+})
+
+function GroupCard(props){
+  console.log("Card View")
+  return(
+    <View style={styles.container}>
+      <Text style={{fontSize:30}}>{props.name} </Text>
+      <Text style={{fontSize:15}}>{props.members} Memebers      |     {props.meetings} Meetings </Text>
+    </View>
+  );
+} 
 
 
 export default class Home extends React.Component {
     state = {
       user:false,
+      groupList:[],
     }
 
 
-    componentDidMount(){
+    async componentDidMount(){
 
           Firebase.auth().onAuthStateChanged(user=>{
             if(user){
               console.log("Hello");
+
+
+              let userId = Firebase.auth().currentUser.uid;
+              Firebase.database().ref('Users/'+userId).on('value', (snapshot)=>{
+                 
+                if(snapshot.exists){
+                    console.log(snapshot.val().groups);
+                    let groups = snapshot.val().groups;
+                    var details = [];
+                    if(groups!=null){
+                      groups.map(group=>{
+                        console.log("Group Name: "+group);
+                        Firebase.database().ref().child('Groups').child(group).child('Group Description').on('value', (snapshot)=>{
+                      
+                          if(snapshot.exists){
+                            let detail = snapshot.val();
+                            console.log("Group Detail: "+ snapshot.val().groupName);
+                            details.push(detail)
+                            this.setState({groupList:details})
+                  
+                          }
+          
+                         });
+        
+                        });
+                    }
+          
+                }
+          
+              });
+
+
             }
             else{
               console.log("Sign In!!!!!!!");
@@ -26,6 +77,10 @@ export default class Home extends React.Component {
 
           })
 
+          var details = [];
+          
+
+
     }
 
     render(){
@@ -33,6 +88,11 @@ export default class Home extends React.Component {
             <View>
                 <Button title="Settings" onPress={()=>this.props.navigation.navigate('Settings')}></Button>
                 <Text>Welcome to your home page</Text>
+                {
+                this.state.groupList.map((item)=>{
+                  return(<GroupCard name={item.groupName} members={item.members.length} meetings='0'/>);
+                })
+                }
             </View>
         )
     }

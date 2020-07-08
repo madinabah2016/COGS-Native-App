@@ -116,9 +116,12 @@ const styles = StyleSheet.create({
 
             if(error){
                 console.log("Error Creating New Group: "+error);
+
             }
             else{
                 console.log("New Group Has been created");
+                const {goBack} = this.props.navigation;
+                goBack();
             }
 
             }); 
@@ -140,7 +143,7 @@ const styles = StyleSheet.create({
                 <TextInput style={styles.inputMulti} onChangeText={this.handleDescription} multiline={true}></TextInput>
                 <Text style={styles.text}>Description</Text>
 
-                <Button  marginTop='20' title='Create' backgroundColor='blue' style={styles.button} onPress={this.create}></Button>
+                <Button title='Create' backgroundColor='blue' style={styles.button} onPress={this.create}></Button>
 
             </View>
             

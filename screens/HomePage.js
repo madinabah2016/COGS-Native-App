@@ -4,7 +4,8 @@ import {
 } from 'react-native';
 
 import Firebase, {getUserGroups, getGroupDetail} from '../api/config'
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
+
 
 const styles = StyleSheet.create({
 
@@ -12,6 +13,15 @@ const styles = StyleSheet.create({
     marginTop:5,
     justifyContent:'center',
     alignItems:'center',
+  },
+
+  fab:{
+    backgroundColor:'blue',
+    borderRadius:50,
+    width:50,
+    height:50,
+    right:30,
+    bottom:30,
   }
 })
 
@@ -87,6 +97,7 @@ export default class Home extends React.Component {
             <View>
                 <Button title="Settings" onPress={()=>this.props.navigation.navigate('Settings')}></Button>
                 <Text>Welcome to your home page</Text>
+
                 <ScrollView>
                   {
                   this.state.groupList.map((item)=>{
@@ -94,6 +105,8 @@ export default class Home extends React.Component {
                   })
                   }
                 </ScrollView>
+                <Button title="Create Group" onPress={()=>this.props.navigation.navigate('Create Group')}></Button>
+
             </View>
         )
     }

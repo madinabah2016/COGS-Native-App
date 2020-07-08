@@ -9,6 +9,7 @@ import SignIn from './screens/SignInPage';
 import SignUp from './screens/SignUpPage'; 
 import Home from './screens/HomePage';
 import Settings from './screens/SettingsPage';
+import CreateGroup from './screens/CreateGroupsPage';
 
 
 export default function App() {
@@ -32,6 +33,7 @@ function MainStackNavigator() {
         <Stack.Screen name='SignUp' component={SignUp} />
         <Stack.Screen name='Home' component={Home} />
         <Stack.Screen name='Settings' component={Settings}/>
+        <Stack.Screen name='Create Group' component={CreateGroup}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

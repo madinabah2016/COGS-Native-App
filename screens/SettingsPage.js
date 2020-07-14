@@ -6,6 +6,9 @@ import Firebase from 'firebase';
 import ImagePicker from 'react-native-image-picker';
 
 
+
+
+
 export default class Settings extends React.Component{
 
     constructor(props){
@@ -19,6 +22,8 @@ export default class Settings extends React.Component{
                 resourcePath:{uri:'https://i.picsum.photos/id/152/3888/2592.jpg?hmac=M1xv1MzO9xjf5-tz1hGR9bQpNt973ANkqfEVDW0-WYU'},
         }
     }
+
+
 
 
     componentDidMount(){

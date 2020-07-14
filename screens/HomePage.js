@@ -53,7 +53,7 @@ export default class Home extends React.Component {
               let userId = Firebase.auth().currentUser.uid;
               Firebase.database().ref('Users/'+userId).on('value', (snapshot)=>{
                  
-                if(snapshot.exists){
+                if(snapshot.exists()){
                     console.log(snapshot.val().groups);
                     let groups = snapshot.val().groups;
                     var details = [];
@@ -62,7 +62,7 @@ export default class Home extends React.Component {
                         console.log("Group Name: "+group);
                         Firebase.database().ref().child('Groups').child(group).child('Group Description').on('value', (snapshot)=>{
                       
-                          if(snapshot.exists){
+                          if(snapshot.exists()){
                             let detail = snapshot.val();
                             console.log("Group Detail: "+ snapshot.val().groupName);
                             details.push(detail)
@@ -96,6 +96,7 @@ export default class Home extends React.Component {
         return(
             <View>
                 <Button title="Settings" onPress={()=>this.props.navigation.navigate('Settings')}></Button>
+                <Button title="Search"  onPress={()=>this.props.navigation.navigate('Search Group')}></Button>
                 <Text>Welcome to your home page</Text>
 
                 <ScrollView>

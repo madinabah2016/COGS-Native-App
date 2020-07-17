@@ -49,7 +49,6 @@ export default class Home extends React.Component {
             if(user){
               console.log("Hello");
 
-
               let userId = Firebase.auth().currentUser.uid;
               Firebase.database().ref('Users/'+userId).on('value', (snapshot)=>{
                  

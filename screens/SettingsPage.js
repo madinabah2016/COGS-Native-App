@@ -63,20 +63,34 @@ export default class Settings extends React.Component{
 
     save = ()=>{ 
         let id = Firebase.auth().currentUser.uid.toString();
-        var user = {name:this.state.username, courses:this.state.courses}
         console.log('User name: '+this.state.username+' Course:'+ this.state.courses)
 
-        Firebase.database().ref('Users/'+id).set(user, (error)=>{
+        Firebase.database().ref('Users/'+id).once('value', (snapshot)=>{
 
-          if(error){
-            console.log("Error Message in settings: "+error);
-          }
-          else{
-            console.log('Settings is succesfully saved')
+          var user = {name:this.state.username, courses:this.state.courses};
+          if(snapshot.exists()){
+
+            if(snapshot.val().hasOwnProperty('groups')){
+              console.log("Hello");
+              user = {name:this.state.username, courses:this.state.courses, groups:snapshot.val().groups}
+            }
             
           }
+          Firebase.database().ref('Users/'+id).set(user, (error)=>{
+
+            if(error){
+              console.log("Error Message in settings: "+error);
+            }
+            else{
+              console.log('Settings is succesfully saved')
+                
+            }
+
+          }); 
+
 
         });
+
 
         const {goBack} = this.props.navigation;
         goBack();
